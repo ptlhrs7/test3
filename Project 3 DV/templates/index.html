@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>
+        Travel Buddy
+    </title>
+    <link rel="icon" href="https://bit.ly/3K8iyt4" type="png">
+    <link rel="stylesheet" type="text/css" href="./static/css/style.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <script src="https://kit.fontawesome.com/e03eb121c9.js" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="../static/js/index.js"></script>
+
+ </head>
+
+<body>
+
+    
+
+    <h1>Travel Buddy</h1>
+
+    <input id="pac-input" 
+            type="text" 
+            placeholder="Search here"
+            class="controls"/>
+ 
+  <div id="map"></div>
+
+  <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFIxvsaRCjNMJ7Rxo3X37WukBZS6h-I74&callback=initAutocomplete&libraries=places&v=weekly" 
+    async>
+</script>
+
+
+<!--/form-->  
+<div class="nev">
+    <button onclick="myGyms()" id="gyms" class="btn-hover color-7">Gyms</button>
+    <button onclick="myHotels()" id="hotels" class="btn-hover color-7">Hotels</button>
+    <button onclick="myRestaurant()" id="restaurant" class="btn-hover color-7">Restaurants</button>
+    <button onclick="myEntertainment()" id="entertainment" class="btn-hover color-7">Entertainment</button>
+    <button onclick="myAttraction()" id="attraction" class="btn-hover color-7">Attractions</button>
+</div>
+
+<div class="Infobox" id="InfoBox">
+    <div class="headtext">
+         <h2 id="headTitle"></h2>
+    </div>
+    <div class="CenterBox">
+        <div><div class="TopLocInfo">
+            <div>
+                <div class="TopLocInfo_grid">
+                    <div class="IMG"><img id="LocImg0" class="IMG" src = "https://bit.ly/3K6lgiR"></div>
+                    <div class="LocName" id="LocName0">Location Name</div>
+                    <div class="Reviews">
+                        <div class="stars">
+                            <div class="star_grid">
+                                <div><i class="fa fa-star"></i></div>
+                                <div><i class="fa fa-star"></i></div>
+                                <div><i class="fa fa-star"></i></div>
+                                <div><i class="fa fa-star"></i></div>
+                                <div><i class="fa fa-star"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Description" id="LocDes0">Lorem Ipsum is simply dummy text of the </div>
+                </div> 
+            </div>
+                <div class="TopLocInfo_grid">
+                    <div class="IMG"><img id="LocImg1" class="IMG" src = "../Images/img.jpeg"></div>
+                    <div class="LocName" id="LocName1">Location Name</div>
+                    <div class="Reviews">
+                        <div class="star">
+                            <div class="star_grid">
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="Description" id="LocDes1">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+            </div> 
+                <div class="TopLocInfo_grid">
+                    <div class="IMG"><img id="LocImg2" class="IMG" src = "../Images/img.jpeg"></div>
+                    <div class="LocName" id="LocName2">Location Name</div>
+                    <div class="Reviews">
+                        <div class="star">
+                            <div class="star_grid">
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="Description" id="LocDes2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+            </div>
+                <div class="TopLocInfo_grid">
+                    <div class="IMG"><img id="LocImg3" class="IMG" src = "../Images/img.jpeg"></div>
+                    <div class="LocName" id="LocName3">Location Name</div>
+                    <div class="Reviews">
+                        <div class="star">
+                            <div class="star_grid">
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="Description" id="LocDes3">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+            </div>
+                <div class="TopLocInfo_grid">
+                    <div class="IMG"><img id="LocImg4" class="IMG" src = "../Images/img.jpeg"></div>
+                    <div class="LocName" id="LocName4">Location Name</div>
+                    <div class="Reviews">
+                        <div class="star">
+                            <div class="star_grid">
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="Description" id="LocDes4">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+            </div>
+            </div>
+        </div>
+        <div><div class="TopLocInfo">
+            <div>
+                <div class="TopLocInfo_grid">
+                    <div class="IMG"><img id="LocImg5" class="IMG" src = "../Images/img.jpeg"></div>
+                    <div class="LocName" id="LocName5">Location Name</div>
+                    <div class="Reviews">
+                        <div class="star">
+                            <div class="star_grid">
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Description" id="LocDes5">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+                </div> 
+            </div>
+            <div>
+                <div class="TopLocInfo_grid">
+                    <div class="IMG"><img id="LocImg6" class="IMG" src = "../Images/img.jpeg"></div>
+                    <div class="LocName" id="LocName6">Location Name</div>
+                    <div class="Reviews">
+                        <div class="star">
+                            <div class="star_grid">
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Description" id="LocDes6">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+                </div> 
+            </div>
+            <div>
+                <div class="TopLocInfo_grid">
+                    <div class="IMG"><img id="LocImg7" class="IMG" src = "../Images/img.jpeg"></div>
+                    <div class="LocName" id="LocName7">Location Name</div>
+                    <div class="Reviews">
+                        <div class="star">
+                            <div class="star_grid">
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Description" id="LocDes7">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+                </div> 
+            </div>
+            <div>
+                <div class="TopLocInfo_grid">
+                    <div class="IMG"><img id="LocImg8" class="IMG" src = "../Images/img.jpeg"></div>
+                    <div class="LocName" id="LocName8">Location Name</div>
+                    <div class="Reviews">
+                        <div class="star">
+                            <div class="star_grid">
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Description" id="LocDes8">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+                </div> 
+            </div>
+            <div>
+                <div class="TopLocInfo_grid">
+                    <div class="IMG"><img id="LocImg9" class="IMG" src = "../Images/img.jpeg"></div>
+                    <div class="LocName" id="LocName9">Location Name</div>
+                    <div class="Reviews">
+                        <div class="star">
+                            <div class="star_grid">
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                                <div><i class="fas fa-star"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Description" id="LocDes9">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+                </div> 
+            </div>
+            </div>
+        </div> 
+    </div>
+</div>
+
+<div class="footer">
+    <p>copyright © 2022 all rights reserved</p>
+</div>
+
+
+
+</body>
+
+</html>

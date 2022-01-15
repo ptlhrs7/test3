@@ -1,0 +1,192 @@
+# pip install sqlalchemy-utils
+
+# This function uses Google Geocode to convert the user's search into latitude / longitude coordinates.
+
+#Imports
+import requests
+import json
+import pandas as pd
+from datetime import *
+import sqlalchemy as sql
+from sqlalchemy_utils.functions.orm import table_name
+from api_keys import password
+
+# Get Google developer API key from file: api_keys.py
+from api_keys import g_key
+
+# Test Target (this will be passed in from calling routine)
+target = "30327"
+
+# Build the endpoint URL
+target_url = f"https://maps.googleapis.com/maps/api/geocode/json?address={target}&key={g_key}"
+
+try:
+    # Run a request to the endpoint and convert result to a json
+    response = requests.get(target_url)
+    geo_data = response.json()
+
+    # Extract latitude and longitude and create key variable
+    lat = round(geo_data["results"][0]["geometry"]["location"]["lat"],2)
+    lng = round(geo_data["results"][0]["geometry"]["location"]["lng"],2)
+    loc_key = f'{lat},{lng}'
+
+    #Determine size of output
+
+    g_range = len(geo_data['results'][0]["address_components"])
+
+    #Declare empty variables - in case an entry is missing one. 
+
+    search_data = {}
+    area = ''
+    city = ''
+    state = ''
+    country = ''
+
+    #find tags, and assign values. 
+
+    for y in range(g_range):
+        if geo_data["results"][0]["address_components"][y]["types"][0] == "neighborhood":
+            area = geo_data["results"][0]["address_components"][y]["long_name"]
+        if geo_data["results"][0]["address_components"][y]["types"][0] == "locality":
+            city = geo_data["results"][0]["address_components"][y]["long_name"]
+        if geo_data["results"][0]["address_components"][y]["types"][0] == "administrative_area_level_1":
+            state = geo_data["results"][0]["address_components"][y]["long_name"]
+        if geo_data["results"][0]["address_components"][y]["types"][0] == "country":
+            country = geo_data["results"][0]["address_components"][y]["long_name"]
+        if area == '':
+            area = 'N/A'
+
+    #Find Current Date
+
+    input_date = date.isoformat(date.today())
+    #+ timedelta(days =7)
+
+    #create dictionary for search table
+
+    search_data = {'loc_key': loc_key, 'area': area, 'city': city, 'loc_state': state, 'country': country, 'input_date': input_date}
+
+    #assign dictionary to dataframe
+
+    entry_data = pd.DataFrame(search_data, index=[0])
+
+    # Output the coordinates
+    print(f"Latitude: {lat}")
+    print(f"Longitude: {lng}")
+    print(entry_data)
+
+except:
+    # Returnb an error message if API request failed
+    print(f"A Google error has occured: {response.status_code} {response.reason}")
+
+##############################################################################################################################
+
+# This function collects the data from Yelp API and returns it as a dataframe.
+
+#Imports
+import requests
+import json
+import pandas as pd
+
+# Get Yelp API key from file: api_keys.py
+from api_keys import yelp_key
+
+categories = ['restaurants', 'bars', 'hotels', 'gyms', 'landmarks', 'arts']
+
+# Test parameters (these will be passed in from calling routine)
+input_lat = lat
+input_lon = lng
+#category = 'restaurants'
+
+# Construct the search parameters
+headers = {'Authorization': 'Bearer {}'.format(yelp_key)}
+url = 'https://api.yelp.com/v3/businesses/search'
+
+#Insert Search Table Row
+
+table_name = 'searches'
+engine = sql.create_engine(f"postgresql://postgres:{password}@localhost/TravelBuddyDB")
+
+with engine.connect() as cnxn:  # the connection will automatically close after executing the with block
+                entry_data.to_sql(table_name, cnxn, if_exists="append", index=False)
+                print(f"{table_name} successfully inserted.")  
+
+for category in categories:
+
+    table_name = category
+
+    params = {
+        'categories': category, 
+        'latitude': input_lat,
+        'longitude': input_lon,
+        'limit': 50
+    }
+
+    # Run a request to the endpoint and convert to a json
+    try:
+        response = requests.get(url, headers=headers, params=params, timeout=5)
+        yelp_data = response.json()
+    except:
+        print(f"A Yelp error has occured: {response.status_code} {response.reason}")    
+        #return ("N/A")
+
+    num_places = len(yelp_data["businesses"])
+
+    # Define empty lists to place data into
+    search_zip = []
+    bus_id = []
+    name = []
+    price = []
+    rating = []
+    address = []
+    city = []
+    zip_code = []
+    phone = []
+    img = []
+    latitude = []
+    longitude = []
+
+    # Populate the lists
+    for place in yelp_data["businesses"]:
+        price_available =  "price" in place
+        search_zip.append(f'{input_lat},{input_lon}')
+        bus_id.append(place['id'])
+        name.append(place['name'])
+        if price_available:
+            price.append(place['price'])
+        else:
+            price.append('N/A')  # in case the price rating is missing
+        rating.append(place['rating'])
+        address.append(place['location']['address1'])
+        city.append(place['location']['city'])
+        zip_code.append(place['location']['zip_code'])
+        latitude.append(place['coordinates']['latitude'])
+        longitude.append(place['coordinates']['longitude'])
+        phone.append(place['phone'])
+        img.append(place['image_url'])
+
+    # Put lists into dictionary
+    yelp_dict = {
+        'loc_key': search_zip,
+        'bus_id': bus_id,
+        'bus_name':name,
+        'price':price,
+        'rating':rating,
+        'address':address,
+        'city':city,
+        'zip_code':zip_code,
+        'phone':phone,
+        'image':img,
+        'latitude':latitude,
+        'longitude':longitude 
+    }
+
+    # Convert distionary to dataframe
+    yelp_DF = pd.DataFrame(yelp_dict)
+
+
+    with engine.connect() as cnxn:  # the connection will automatically close after executing the with block
+                yelp_DF.to_sql(table_name, cnxn, if_exists="append", index=False)
+                print(f"{table_name} successfully inserted.")  
+
+    # Return the dataframe
+    #print(yelp_DF.head())

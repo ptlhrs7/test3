@@ -1,0 +1,298 @@
+body {
+    background: rgb(6,6,6);
+    background: -moz-linear-gradient(32deg, rgba(6,6,6,1) 0%, rgba(3,42,56,1) 21%, rgba(9,9,9,1) 66%, rgba(0,0,0,1) 100%, rgba(57,57,57,1) 100%);
+    background: -webkit-linear-gradient(32deg, rgba(6,6,6,1) 0%, rgba(3,42,56,1) 21%, rgba(9,9,9,1) 66%, rgba(0,0,0,1) 100%, rgba(57,57,57,1) 100%);
+    background: linear-gradient(32deg, rgba(6,6,6,1) 0%, rgba(3,42,56,1) 21%, rgba(9,9,9,1) 66%, rgba(0,0,0,1) 100%, rgba(57,57,57,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#060606",endColorstr="#393939",GradientType=1);  
+    background-attachment: fixed;
+    background-size: cover;
+    height: auto;
+  }
+.footer {
+    font-family: 'Poppins';
+    text-align: center;
+    font-size: 15px;
+    color: white;
+    margin-top: 45px;
+    padding-bottom: 30px;
+    opacity: 80%;
+}
+
+h1 {
+    font-family: 'Poppins';
+    text-align: center;
+    color: aliceblue;
+    font-size: 48px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+/* ----------------------------------------------------------------------------------- */
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+       #map {
+        height: 60%;
+        width: 80%; 
+        border-radius: 10px;
+        margin-left: 10%;
+        box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.479);
+       }
+      
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      
+      
+      #description {
+        font-family: 'Poppins';
+        font-size: 15px;
+        font-weight: 300;
+        
+      }
+      
+      #infowindow-content .title {
+        font-weight: bold;
+      }
+      
+      #infowindow-content {
+        display: none;
+      }
+      
+      #map #infowindow-content {
+        display: inline;
+      }
+      
+      .pac-card {
+        background-color: #fff;
+        border: 0;
+        border-radius: 100px;
+        box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+        margin: 10px;
+        padding: 0 0.5em;
+        font: 400 18px 'Poppins', Arial, sans-serif;
+        overflow: hidden;
+        font-family: 'Poppins';
+        padding: 0;
+      }
+      
+      #pac-container {
+        padding-bottom: 12px;
+        margin-right: 12px;
+      }
+      
+      .pac-controls {
+        display: inline-block;
+        padding: 5px 11px;
+      }
+      
+      .pac-controls label {
+        font-family: 'Poppins';
+        font-size: 13px;
+        font-weight: 300;
+      }
+      
+      #pac-input {
+        background-color: #fff;
+        font-family:'Poppins';
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 10%;
+        margin-top: 15px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 500px;
+        height: 30px;
+        border-radius: 40px;
+        border: 2px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.459);
+      }
+      
+      #pac-input:focus {
+        border-color: #4d90fe;
+      }
+      
+      #title {
+        color: #fff;
+        background-color: #4d90fe;
+        font-size: 25px;
+        font-weight: 500;
+        padding: 6px 12px;
+      }
+      
+      #target {
+        width: 345px;
+      }
+
+/* ----------------------------------------------------------------------------------- */
+.nev {
+    font-family: 'Poppins', serif;
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    padding-top: 30px;
+}
+/* -------------------------------------------------------------------------------------------- */
+.btn-hover {
+    font-family: 'Poppins';
+    width: 200px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 55px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 50px;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+.btn-hover:hover {
+    background-position: 100% 0;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:active {
+  box-shadow: 0px 0px 20px rgb(0, 0, 0);
+  transform: translateY(4px);
+
+}
+
+.btn-hover.color-7 {
+    background-image: linear-gradient(32deg, #5100e7, #842491, #0175d4, #04aab6 );
+}
+/* -------------------------------------------------------------------------------------------- */
+h2 {
+    font-family: 'Poppins';
+    text-align: left;
+    margin-left: 30px;
+}
+h3 {
+    font-family: 'Poppins';
+}
+p {
+    font-family: 'Poppins';
+}
+.Infobox {
+    display: grid; 
+    width: 80%;
+    margin-left: 10%;
+    background: linear-gradient(-32deg, rgba(6, 6, 6, 0.219) 0%, rgba(3, 42, 56, 0.39) 21%, rgba(4, 30, 54, 0.349) 66%, rgba(25, 0, 65, 0.466) 100%, rgba(0, 50, 70, 0.329) 100%);
+    border-radius: 10px;
+    margin-top: 30px;
+    color: white;
+    font-family: 'Poppins';
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.479);
+    
+}
+.headtext {
+    display: grid;
+    width: 100%;  
+}
+.CenterBox {
+    display: grid;
+    grid-template-columns: 47.5% 47.5%; 
+    grid-column-gap: 1em;
+    justify-content: center;  
+    align-items: center; 
+    margin-bottom: 20px;
+
+}
+.CenterBox > div {
+    background: linear-gradient(32deg, rgba(22, 22, 22, 0.219) 0%, rgba(0, 59, 80, 0.39) 21%, rgba(6, 44, 80, 0.349) 66%, rgba(12, 3, 138, 0.466) 100%, rgba(1, 76, 105, 0.329) 100%);
+    padding: 1em;
+    border-radius: 10px;
+    padding-bottom: 0em;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.479);
+}
+.CenterBox > div:nth-child(odd) {
+    background: linear-gradient(32deg, rgba(22, 22, 22, 0.219) 0%, rgba(0, 59, 80, 0.39) 21%, rgba(6, 44, 80, 0.349) 66%, rgba(12, 3, 138, 0.466) 100%, rgba(1, 76, 105, 0.329) 100%);
+    padding: 1em;
+    border-radius: 10px;
+    padding-bottom: 0em;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.479);
+}
+.TopLocInfo {
+    display: grid;
+    grid-template-columns: 100%; 
+    justify-content: center;  
+    align-items: center;
+}
+.TopLocInfo > div {
+    background-color: rgba(0, 0, 0, 0.349);
+    padding: 1em;
+    border-radius: 10px;
+    margin-bottom: 1em;
+}
+/* -------------------------------------------------------------------------------------------- */
+
+.TopLocInfo_grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    justify-items: stretch;
+
+}
+.TopLocInfo_grid > div {
+   
+    border-radius: 10px;
+
+
+}
+
+.IMG {
+    grid-row: 1/3;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    
+}
+
+.LocName {
+    grid-column: 2/3;
+    /* background-color: rgb(226, 95, 43); */
+    margin-left: 10px;
+
+}
+/*
+.Reviews {
+    background-color:gold;
+}
+*/
+.star_grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    margin-right: -8px;
+    justify-items: stretch;
+}
+
+.stars {
+  background-color: rgb(10, 10, 10);
+  background-image: linear-gradient(90deg, gold 90%, white 10%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+
+
+.Description {
+    grid-column: 2/4;
+   /* background-color: rgb(226, 43, 113); */
+    font-size: 10px;
+    margin-left: 9px;
+    justify-items: stretch;
+}
+
+
+/* --------------------------------------------------------------------------------------- */
+
